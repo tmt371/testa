@@ -4,7 +4,7 @@ function xOrder() {
 
     // Define the HTML content directly in the JavaScript
     const htmlContent = `
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -50,20 +50,29 @@ function xOrder() {
             margin: 20px auto;
         }
 
-    .bottom-section {
-    display: flex;
-    flex-direction: column;  /* 垂直排列元素 */
-    justify-content: flex-start;  /* 可選，讓元素從上往下排列 */
-    align-items: flex-start;  /* 可選，對齊方式設為左側 */
-}
-
-
+        .bottom-section {
+            display: flex;
+            flex-direction: column;
+            /* 垂直排列元素 */
+            justify-content: flex-start;
+            /* 可選，讓元素從上往下排列 */
+            align-items: flex-start;
+            /* 可選，對齊方式設為左側 */
+        }
 
         .date-input {
             border: none;
             border-bottom: 1px solid #333;
             padding: 5px 0;
             width: 100px;
+
+            .bottom-section2 {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
         }
     </style>
 </head>
@@ -83,7 +92,7 @@ function xOrder() {
         <div class="company-info">
             <h2>Company: <span contenteditable="true"></span></h2>
             <p>Ref: <span contenteditable="true"></span></p>
-            <p>email: ezblinds＠ezbns.com.au</p>
+            
 
         </div>
     </div>
@@ -93,6 +102,9 @@ function xOrder() {
     </div>
 
     <div class="section bottom-section">
+    </div>
+
+    <div class="section bottom-section2">
     </div>
     </div>
 
@@ -133,7 +145,7 @@ function xOrder() {
     </script>
 </body>
 
-</html>    `;
+</html>   `;
 
     // Set the HTML content of the floating window
     floatingWindow.document.open();
@@ -225,7 +237,6 @@ function performAdditionalTasks(floatingWindow) {
     oriTable.id = 'OriTable'; // 將新表格的 id 設置為 OriTable
     oriTable.style.marginTop = '10px'; // 設置垂直距離為 10px
 
-
     // 2. 找到 bottom-section，並將 OriTable 插入到 bottom-section 中
     const bottomSection = floatingWindow.document.querySelector('.section.bottom-section');
     if (bottomSection) {
@@ -241,50 +252,49 @@ function performAdditionalTasks(floatingWindow) {
         cells.forEach(cell => {
             cell.style.border = '1px solid black';
         });
-
-
     } else {
         console.error('bottom-section not found');
         return;
     }
 
     // 3. 複製 totalprice 表格並命名為 OriPriceTable
-    const originalTotalPriceTable = document.querySelector('#totalprice'); // 從原始頁面查找 totalprice 表格
-    if (originalTotalPriceTable) {
-        const oriPriceTable = originalTotalPriceTable.cloneNode(true); // 深層複製 totalprice 表格
-        oriPriceTable.id = 'OriPriceTable'; // 設置 id 為 OriPriceTable
-        oriPriceTable.style.marginTop = '10px'; // 設置垂直距離為 10px
+    const bottomSection2 = floatingWindow.document.querySelector('.section.bottom-section2');
+    if (bottomSection2) {
+        const originalTotalPriceTable = document.querySelector('#totalprice'); // 從原始頁面查找 totalprice 表格
+        if (originalTotalPriceTable) {
+            const oriPriceTable = originalTotalPriceTable.cloneNode(true); // 深層複製 totalprice 表格
+            oriPriceTable.id = 'OriPriceTable'; // 設置 id 為 OriPriceTable
+            oriPriceTable.style.marginTop = '10px'; // 設置垂直距離為 10px
 
-        // 將 OriPriceTable 插入到 OriTable 後面（bottom-section 中）
-        bottomSection.appendChild(oriPriceTable);
+            // 將 OriPriceTable 插入到 bottom-section2 中
+            bottomSection2.appendChild(oriPriceTable);
 
-        // 調整 OriPriceTable 的寬度為 bottom-section 的 95%
-        oriPriceTable.style.width = '98%';
-        oriPriceTable.style.boxSizing = 'border-box';
-        oriPriceTable.style.borderCollapse = 'collapse';
+            // 調整 OriPriceTable 的寬度為 bottom-section2 的 98%
+            oriPriceTable.style.width = '98%';
+            oriPriceTable.style.boxSizing = 'border-box';
+            oriPriceTable.style.borderCollapse = 'collapse';
 
-        // 為每列手動設置固定寬度並調整樣式
-        const rows = oriPriceTable.querySelectorAll('tr');
-        rows.forEach((row, rowIndex) => {
-            const cells = row.querySelectorAll('td, th');
-            cells.forEach((cell, cellIndex) => {
-                // 為每列手動設置固定寬度（以匹配原始表格的設置）
-                // cell.style.width = '15px'; // 設置每一列寬度為 100px，可以根據需求調整
+            // 為每列手動設置固定寬度並調整樣式
+            const rows = oriPriceTable.querySelectorAll('tr');
+            rows.forEach((row, rowIndex) => {
+                const cells = row.querySelectorAll('td, th');
+                cells.forEach((cell, cellIndex) => {
+                    // 調整文字對齊
+                    cell.style.textAlign = 'center';
 
-                // 調整文字對齊
-                cell.style.textAlign = 'center';
-
-                // 設置背景顏色
-                if (rowIndex === 0 && cellIndex > 0) {
-                    cell.style.backgroundColor = 'lightgreen'; // 淡綠色
-                } else if (rowIndex === 2 || rowIndex === 4) {
-                    cell.style.backgroundColor = 'lightgray'; // 淺灰色
-                }
+                    // 設置背景顏色
+                    if (rowIndex === 0 && cellIndex > 0) {
+                        cell.style.backgroundColor = 'lightgreen'; // 淡綠色
+                    } else if (rowIndex === 2 || rowIndex === 4) {
+                        cell.style.backgroundColor = 'lightgray'; // 淺灰色
+                    }
+                });
             });
-        });
-
+        } else {
+            console.warn('No totalprice table found. Skipping OriPriceTable creation.');
+        }
     } else {
-        console.warn('No totalprice table found. Skipping OriPriceTable creation.');
+        console.error('bottom-section2 not found');
     }
 
     // 4. 使 middle-container 高度具有彈性（自適應內容高度）
@@ -314,9 +324,9 @@ function performAdditionalTasks(floatingWindow) {
     deleteColumnByIndex(oriTable, 15); // 刪除第15列
     deleteColumnByIndex(oriTable, 13); // 刪除第13列
     deleteColumnByIndex(oriTable, 5);  // 刪除第5列
+
     // 6. 修改 OriTable 列的寬度
     const oriTableCols = oriTable.querySelectorAll('col');
-
 
     // 以下是針對 dataTable 的一系列處理
     moveColumnData(table, 1, 14); //把W搬去表格2的Price
