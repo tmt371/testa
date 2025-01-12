@@ -202,7 +202,7 @@ function xOrder() {
             // Start the additional tasks
             setTimeout(() => {
                 performAdditionalTasks(floatingWindow);
-            }, 900);
+            }, 600);
         } else {
             console.error('Required elements not found. Retrying...');
             setTimeout(copyDatatableAndStyles, 100); // Retry after 100ms
@@ -259,14 +259,28 @@ function performAdditionalTasks(floatingWindow) {
         bottomSection.appendChild(oriPriceTable);
 
         // 調整 OriPriceTable 的寬度為 bottom-section 的 95%
-        oriPriceTable.style.width = '98%'; // 直接設置寬度為 95%
-        oriPriceTable.style.boxSizing = 'border-box'; // 確保 padding 不影響總寬度
-        oriPriceTable.style.borderCollapse = 'collapse'; // 設置表格邊框合併
-        //為每列手動設置固定寬度（以匹配原始表格的設置）
-        const cols = oriPriceTable.querySelectorAll('col');
-        cols.forEach((col, index) => {
-            //    col.style.width = '15px'; // 設置每一列寬度為 100px，可以根據需求調整
-            cell.style.textAlign = 'center';
+        oriPriceTable.style.width = '98%';
+        oriPriceTable.style.boxSizing = 'border-box';
+        oriPriceTable.style.borderCollapse = 'collapse';
+
+        // 為每列手動設置固定寬度並調整樣式
+        const rows = oriPriceTable.querySelectorAll('tr');
+        rows.forEach((row, rowIndex) => {
+            const cells = row.querySelectorAll('td, th');
+            cells.forEach((cell, cellIndex) => {
+                // 為每列手動設置固定寬度（以匹配原始表格的設置）
+                // cell.style.width = '15px'; // 設置每一列寬度為 100px，可以根據需求調整
+
+                // 調整文字對齊
+                cell.style.textAlign = 'center';
+
+                // 設置背景顏色
+                if (rowIndex === 0 && cellIndex > 0) {
+                    cell.style.backgroundColor = 'lightgreen'; // 淡綠色
+                } else if (rowIndex === 2 || rowIndex === 4) {
+                    cell.style.backgroundColor = 'lightgray'; // 淺灰色
+                }
+            });
         });
 
     } else {
@@ -519,6 +533,15 @@ function processAndReorganizeTable(floatingWindow) {
         datatable2.rows[i].cells[0].textContent = i.toString();
     }
 
+    // 9. Apply styles to all cells in datatable2
+    for (let i = 0; i < datatable2.rows.length; i++) {
+        const cells = datatable2.rows[i].cells;
+        for (let j = 0; j < cells.length; j++) {
+            cells[j].style.textAlign = 'center';
+            cells[j].style.color = 'black';
+            cells[j].style.fontSize = '60%';
+        }
+    }
 }
 
 function copyNC(dataTable, oriTable) {
@@ -614,9 +637,3 @@ function Redoprice(floatingWindow) {
         console.error('datatable2 or oritable not found');
     }
 }
-
-
-
-
-
-
