@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<meta charset="UTF-8">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roller Blinds Price checker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="upper-section">
+            <div class="input-container">
+                <label for="numberInput">Input measurements(250-3500):</label>
+                <input type="tel" id="numberInput" aria-describedby="inputError">
+                <div id="inputError" class="error-message" role="alert"></div>
+            </div>
+            <div class="table-container">
+                <table id="dataTable" aria-label="數據表格">
+                    <thead>
+                        <tr>
+                            <th scope="col">NO</th>
+                            <th scope="col">W</th>
+                            <th scope="col">H</th>
+                            <th scope="col" class="bo-header">BO</th>
+                            <th scope="col" class="bo2-header">BO2</th>
+                            <th scope="col" class="sn-header">SN</th>
+                            <th scope="col" class="over-header">over</th>
+                            <th scope="col" class="io-header">I/O</th>
+                            <th scope="col" class="lr-header">L/R</th>
+                            <th scope="col">Chain</th>
+                            <th scope="col" class="bdrive-header">bdrive</th>
+                            <th scope="col" class="dbket-header">dbket</th>
+                            <th scope="col" class="motor-header">motor</th>
+                            <th scope="col">NA</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Discnt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="lower-section">
+            <div class="numpad-container">
+                <div class="numpad" role="group" aria-label="數字鍵盤">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button>6</button>
+                    <button>7</button>
+                    <button>8</button>
+                    <button>9</button>
+                    <button>0</button>
+                    <button>Delete</button>
+                    <button>Enter</button>
+                </div>
+            </div>
+            <div class="function-keys-container">
+                <button>W</button>
+                <button>H</button>
+                <button id="delRowBtn">Del Row</button>
+                <button id="insertRowBtn">Insert</button>
+                <button>Finish</button>
+                <button>Chk Price</button>
+                <div class="empty-cell"></div>
+                <div class="empty-cell"></div>
+                <button id="xQuoButton">xQuo</button>
+                <button id="xOrderButton">xOdr</button>
+                <div class="empty-cell"></div>
+                <div class="empty-cell"></div>
+                <button>Reset</button>
+                <div class="empty-cell"></div>
+                <div class="empty-cell"></div>
+                <div class="empty-cell"></div>
+            </div>
+        </div>
+    </div>
+    <script src="xOrder.js"></script>
+    <script src="xQuo.js"></script>
+    <script src="priceDatabase.js"></script>
+    <script src="finishFunctions.js"></script>
+    <script src="button.js"></script>
+    <script src="main.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

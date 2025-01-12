@@ -1,0 +1,391 @@
+/* Global Variables */
+:root {
+    --primary-color: #007bff;
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --background-color: #f0f0f0;
+    --border-color: #ccc;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.upper-section {
+    height: 70%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container {
+    position: sticky;
+    top: 0;
+    background-color: rgb(161, 196, 241);
+    z-index: 10;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+#numberInput {
+    width: 30%;
+    padding: 15px;
+    font-size: 24px;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+    margin-left: 10px;
+}
+
+.table-container {
+    flex-grow: 0;
+    padding: 0;
+    overflow-x: scroll;
+    max-height: calc(70vh - 100px);
+    width: 1010px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #e6f2ff;
+}
+
+th,
+td {
+    border: 1px solid var(--border-color);
+    padding: 6px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+th {
+    background-color: #e6f2ff;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    width: 2px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 10px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+    width: 10px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+    width: 5px;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+    width: 5px;
+}
+
+th:nth-child(6),
+td:nth-child(6) {
+    width: 5px;
+}
+
+th:nth-child(7),
+td:nth-child(7) {
+    width: 4px;
+}
+
+th:nth-child(8),
+td:nth-child(8) {
+    width: 4px;
+}
+
+th:nth-child(9),
+td:nth-child(9) {
+    width: 4px;
+}
+
+th:nth-child(10),
+td:nth-child(10) {
+    width: 10px;
+}
+
+th:nth-child(11),
+td:nth-child(11) {
+    width: 10px;
+}
+
+th:nth-child(12),
+td:nth-child(12) {
+    width: 7px;
+}
+
+th:nth-child(13),
+td:nth-child(13) {
+    width: 8px;
+}
+
+th:nth-child(14),
+td:nth-child(14) {
+    width: 7px;
+}
+
+th:nth-child(15),
+td:nth-child(15) {
+    width: 7px;
+}
+
+th:nth-child(16),
+td:nth-child(16),
+th:nth-child(17),
+td:nth-child(17) {
+    width: 9px;
+}
+
+.highlight {
+    background-color: var(--warning-color);
+}
+
+.error {
+    background-color: var(--error-color);
+    color: rgb(235, 168, 168);
+}
+
+.success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.active-cell {
+    border: 2px solid black !important;
+}
+
+.lower-section {
+    height: 30%;
+    background-color: var(--background-color);
+    padding: 15px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+    max-width: 1000px;
+}
+
+.numpad-container,
+.function-keys-container {
+    flex: 1;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    height: 100%;
+}
+
+.function-keys-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.function-keys-container button,
+.function-keys-container .empty-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.function-keys-container button {
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.function-keys-container button:hover {
+    background-color: #ebbaba;
+}
+
+.function-keys-container button:active {
+    background-color: #d0d0d0;
+}
+
+.function-keys-container .empty-cell {
+    border: none;
+}
+
+@media (max-width: 1000px) {
+    .numpad {
+        width: 250px;
+    }
+
+    .numpad-container,
+    .function-keys-container {
+        width: 100%;
+    }
+
+    .lower-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .function-keys-container {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .function-keys-container button {
+        font-size: 14px;
+        padding: 5px;
+    }
+}
+
+.numpad button {
+    font-size: 24px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.numpad button:hover {
+    background-color: #ebbaba;
+}
+
+.numpad button:active {
+    background-color: #d0d0d0;
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.round-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    background-color: white;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.round-button.active {
+    background-color: black;
+}
+
+.over-cell {
+    font-weight: bold;
+    text-align: center;
+}
+
+.over-header,
+.bo-header,
+.bo2-header,
+.sn-header,
+.io-header,
+.lr-header,
+.bdrive-header,
+.dbket-header,
+.motor-header {
+    cursor: pointer;
+}
+
+.over-header.active,
+.bo-header.active,
+.bo2-header.active,
+.sn-header.active,
+.io-header.active,
+.lr-header.active,
+.bdrive-header.active,
+.dbket-header.active,
+.motor-header.active {
+    background-color: #808080;
+    color: white;
+}
+
+.io-cell,
+.lr-cell {
+    cursor: pointer;
+    text-align: center;
+}
+
+.chain-cell {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .upper-section,
+    .lower-section {
+        width: 100%;
+        height: auto;
+    }
+
+    .numpad-container,
+    .function-keys-container {
+        width: 100%;
+    }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.invalid-input {
+    background-color: var(--error-color);
+}
